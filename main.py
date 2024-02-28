@@ -88,15 +88,15 @@ def simulate(gas_data, input_data):
              clients_lost: number of missed customers
     """
     fuel_price = {
-        'АИ-80': 43,
-        'АИ-92': 47,
-        'АИ-95': 50,
-        'АИ-98': 65
+        ru.fuel_80: 43,
+        ru.fuel_92: 47,
+        ru.fuel_95: 50,
+        ru.fuel_98: 65
     }
-    sales = {fuel_type: 0 for fuel_type in ['АИ-80', 'АИ-92', 'АИ-95', 'АИ-98']}
-    revenue = {fuel_type: 0 for fuel_type in ['АИ-80', 'АИ-92', 'АИ-95', 'АИ-98']}
-    sales_lost = {fuel_type: 0 for fuel_type in ['АИ-80', 'АИ-92', 'АИ-95', 'АИ-98']}
-    revenue_lost = {fuel_type: 0 for fuel_type in ['АИ-80', 'АИ-92', 'АИ-95', 'АИ-98']}
+    sales = {fuel_type: 0 for fuel_type in [ru.fuel_80, ru.fuel_92, ru.fuel_95, ru.fuel_98]}
+    revenue = {fuel_type: 0 for fuel_type in [ru.fuel_80, ru.fuel_92, ru.fuel_95, ru.fuel_98]}
+    sales_lost = {fuel_type: 0 for fuel_type in [ru.fuel_80, ru.fuel_92, ru.fuel_95, ru.fuel_98]}
+    revenue_lost = {fuel_type: 0 for fuel_type in [ru.fuel_80, ru.fuel_92, ru.fuel_95, ru.fuel_98]}
     clients_lost = 0
     refuel_time = 0
 
