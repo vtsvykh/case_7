@@ -4,8 +4,6 @@ import ru_local as ru
 import matplotlib.pyplot
 
 
-
-
 def read_gas_data(file_gas_data):
     """
     The function collects data about gas stations from an incoming file in the dictionary
@@ -116,7 +114,11 @@ def simulate(gas_data, input_data):
             if client['time'] == time:
                 available_gas_station = [gas_station for gas_station, data in gas_data.items() if
                                          client['fuel_type'] in data['fuel_types']]
-                selected_pump = min(available_gas_station, key=lambda gas_station: len(gas_data[gas_station]['queue']))
+                selected_pump = 0
+                for gas_station in available_gas_station:
+                    if len(gas_data[gas_station]['queue']) < gas_data[gas_station]['max_queue']:
+                        selected_pump = min(available_gas_station, key=lambda gas_station: len(gas_data[gas_station]['queue']))
+
                 service_time = math.ceil(client['litres'] / 10)
 
                 add_time = random.randint(-1, 1)
@@ -186,7 +188,7 @@ def result(sales, sales_lost, revenue, revenue_lost, clients_lost):
     print(f"\n{ru.sold_gasoline_curn_lost}:")
     income_lost = 0
     for fuel_type, sales in revenue_lost.items():
-        income += sales
+        income_lost += sales
         print(f"{fuel_type}: {sales} {ru.currency}")
     print(f"\n{ru.income_lost}: {income_lost} {ru.currency}")
 
@@ -203,7 +205,10 @@ def main():
     sales, sales_lost, revenue, revenue_lost, clients_lost = simulate(gas_data, input_data)
     result(sales, sales_lost, revenue, revenue_lost, clients_lost)
     matplotlib.pyplot.bar(sales.keys(), sales.values())
+    matplotlib.pyplot.show()
     matplotlib.pyplot.bar(revenue.keys(), revenue.values())
     matplotlib.pyplot.show()
+
+
 if __name__ == '__main__':
     main()
