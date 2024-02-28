@@ -203,6 +203,7 @@ def main():
     sales, sales_lost, revenue, revenue_lost, clients_lost = simulate(gas_data, input_data)
     result(sales, sales_lost, revenue, revenue_lost, clients_lost)
     matplotlib.pyplot.bar(sales.keys(), sales.values())
+    matplotlib.pyplot.bar(revenue.keys(), revenue.values())
     matplotlib.pyplot.show()
 if __name__ == '__main__':
     main()
