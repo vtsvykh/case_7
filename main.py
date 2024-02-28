@@ -1,6 +1,9 @@
 import math
 import random
 import ru_local as ru
+import matplotlib.pyplot
+
+
 
 
 def read_gas_data(file_gas_data):
@@ -199,7 +202,7 @@ def main():
     input_data = read_input_data(file_input_data)
     sales, sales_lost, revenue, revenue_lost, clients_lost = simulate(gas_data, input_data)
     result(sales, sales_lost, revenue, revenue_lost, clients_lost)
-
-
+    matplotlib.pyplot.bar(sales.keys(), sales.values())
+    matplotlib.pyplot.show()
 if __name__ == '__main__':
     main()
