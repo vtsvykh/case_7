@@ -102,7 +102,7 @@ def simulate(gas_data, input_data):
             for gas_station in gas_data:
                 time_queue_client = gas_data[gas_station]['queue']
                 if time_queue_client:
-                    if time == min(time_queue_client) and gas_data[gas_station]['queue'] != []:
+                    if time == min(time_queue_client) and gas_data[gas_station]['queue']:
                         print(f"\n{format_time(refuel_time)} - {ru.end_refueling}")
 
                         gas_data[gas_station]['queue'].pop(0)
@@ -113,9 +113,11 @@ def simulate(gas_data, input_data):
             if client['time'] == time:
                 available_gas_station = [gas_station for gas_station, data in gas_data.items() if
                                          client['fuel_type'] in data['fuel_types']]
-                selected_pump = min(available_gas_station, key=lambda x: len(gas_data[x]['queue']))
+                selected_pump = min(available_gas_station, key=lambda gas_station: len(gas_data[gas_station]['queue']))
                 service_time = math.ceil(client['litres'] / 10)
                 add_time = random.randint(-1, 1)
+                if service_time + add_time == 0:
+                    add_time = random.randint(0, 1)
                 refuel_time = time + service_time + add_time
                 print(
                     f"\n{client['time_watch']} - {ru.new_client}: {client['litres']} {ru.litres} {client['fuel_type']} "
@@ -177,11 +179,11 @@ def result(sales, sales_lost, revenue, revenue_lost, clients_lost):
         print(f"{fuel_type}: {litres} {ru.litres}.")
 
     print(f"\n{ru.sold_gasoline_curn_lost}:")
-    income = 0
+    income_lost = 0
     for fuel_type, sales in revenue_lost.items():
         income += sales
         print(f"{fuel_type}: {sales} {ru.currency}")
-    print(f"\n{ru.income_lost}: {income} {ru.currency}")
+    print(f"\n{ru.income_lost}: {income_lost} {ru.currency}")
 
 
 def main():
