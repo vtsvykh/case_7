@@ -117,7 +117,8 @@ def simulate(gas_data, input_data):
                 selected_pump = 0
                 for gas_station in available_gas_station:
                     if len(gas_data[gas_station]['queue']) < gas_data[gas_station]['max_queue']:
-                        selected_pump = min(available_gas_station, key=lambda gas_station: len(gas_data[gas_station]['queue']))
+                        selected_pump = min(available_gas_station,
+                                            key=lambda gas_station: len(gas_data[gas_station]['queue']))
 
                 service_time = math.ceil(client['litres'] / 10)
 
