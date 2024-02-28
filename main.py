@@ -115,9 +115,11 @@ def simulate(gas_data, input_data):
                                          client['fuel_type'] in data['fuel_types']]
                 selected_pump = min(available_gas_station, key=lambda gas_station: len(gas_data[gas_station]['queue']))
                 service_time = math.ceil(client['litres'] / 10)
+
                 add_time = random.randint(-1, 1)
                 if service_time + add_time == 0:
                     add_time = random.randint(0, 1)
+
                 refuel_time = time + service_time + add_time
                 print(
                     f"\n{client['time_watch']} - {ru.new_client}: {client['litres']} {ru.litres} {client['fuel_type']} "
